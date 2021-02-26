@@ -12,6 +12,7 @@ using linqUI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace linqUI
 {
@@ -35,6 +36,9 @@ namespace linqUI
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddDbContext<Northwind>(options => options.UseSqlite("Filename=../linq/Northwind.db"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
