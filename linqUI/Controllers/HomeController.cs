@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using linqUI.Models;
 using linqUI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace linqUI.Controllers
 {
@@ -41,6 +42,21 @@ namespace linqUI.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult ProductsMoreCost(decimal? price)
+        {
+            if (!price.HasValue)
+            {
+                return NotFound();
+            }
+            IEnumerable<Product> model = _db.Products.Include(p => p.Category)
+                                                            .Include(p => p.Supplier);
+            if (model.Count() == 0)
+            {
+                return NotFound($"not found {price:C}");
+            }
+            return View(model);
         }
     }
 }

@@ -20,6 +20,12 @@
             <h4>@Model.Categories[i].CategoryName</h4>
         }
     </ol>
+
+    <h3>Query products by price</h3>
+    <form asp-action="ProductsMoreCost" method="get">
+    <input name="price" placeholder="Enter a product price" />
+    <input type="submit" />
+</form>
     
     
 </div>
