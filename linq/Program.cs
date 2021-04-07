@@ -16,7 +16,7 @@ namespace linq
 
             GroupJoinCategoriesAndProducts();
 
-            // LinqWithSet.setOfLinq();
+            LinqWithSet.setOfLinq();
         }
 
         static void QueryProducts()
